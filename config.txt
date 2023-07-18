@@ -1,0 +1,3 @@
+encoded_host_url:port
+encoded_username
+encoded_password

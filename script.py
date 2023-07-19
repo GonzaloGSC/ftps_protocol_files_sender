@@ -3,11 +3,22 @@ from datetime import datetime
 from base64 import b64decode
 
 try:
-    base_dir = os.path.dirname(os.path.abspath(__file__))
+    # Log file path
+    log_file = "log.txt"
+
+    # Log file path
+    config_file = "config.txt"
     
-    # Folder path to read
-    relative_folder_path = "/files"
-    folder_path = base_dir + relative_folder_path
+    # Read config file
+    with open(config_file, "r") as config:
+        lines = config.readlines()
+        host = b64decode(lines[0].strip()).decode("utf-8").split(":")[0]
+        port = b64decode(lines[0].strip()).decode("utf-8").split(":")[1]
+        username = b64decode(lines[1].strip()).decode("utf-8")
+        password = b64decode(lines[2].strip()).decode("utf-8")
+        file_pattern_01 = lines[3].strip()
+        file_pattern_02 = lines[4].strip()
+        folder_path = lines[5].strip()
     
     plataform_sys = platform.system()
     slash = "\\"
@@ -15,20 +26,10 @@ try:
         slash = "/"
     folder_path = folder_path.replace("\\", slash).replace("/", slash)
 
-    # Log file path
-    log_file = "log.txt"
-
-    # Log file path
-    config_file = "config.txt"
-
-    # File pattern to filter
-    file_pattern_01 = "Entregable_"
-    file_pattern_02 = ".txt"
-
     # Get the list of files matching the pattern
     files = []
     
-    for file in os.listdir(folder_path):
+    for file in os.listdir():
         if file.startswith(file_pattern_01) and file.endswith(file_pattern_02):
             files.append(file)
 
@@ -46,14 +47,6 @@ try:
         # Create the FTP directory path
         ftp_directory = "{}/{}/".format(date_recent.strftime("%Y"), date_recent.strftime("%m"))
 
-        # Read FTP server credentials from config file
-        with open(config_file, "r") as config:
-            lines = config.readlines()
-            host = b64decode(lines[0].strip()).decode("utf-8").split(":")[0]
-            port = b64decode(lines[0].strip()).decode("utf-8").split(":")[1]
-            username = b64decode(lines[1].strip()).decode("utf-8")
-            password = b64decode(lines[2].strip()).decode("utf-8")
-        
         # Establecer la conexión FTP utilizando ftputil
         with ftputil.FTPHost(host, username, password) as ftp:
             with open(log_file, "a") as log:

@@ -1,0 +1,8 @@
+[2023-07-19 16:21:28] ERROR:
+
+Traceback (most recent call last):
+  File "script.py", line 31, in <module>
+    for file in os.listdir(folder_path):
+                ^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] El sistema no puede encontrar la ruta especificada: 'C:\\Users\\GONZAL~1.SAL\\AppData\\Local\\Temp\\_MEI95482\\files'
+

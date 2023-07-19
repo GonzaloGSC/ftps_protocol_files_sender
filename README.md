@@ -1,8 +1,12 @@
 # ftps_protocol_files_sender
 
-Simple script used to send files to a server via an FTPS connection. The script includes an interesting file called "run.py" which, with the proper configuration, can run scripts in other versions of python using virtual environments as well.
+Simple script used to send files to a server via an FTPS connection. 
 
-The config.txt file contains the information for the connection.
+Use auto-py-to-exe to create a .exe file from "script.py".
+
+The script includes an interesting file called "run.py" which, with the proper configuration, can run scripts in other versions of python using virtual environments as well.
+
+The config.txt file contains the information for the connection and the script:
 
 The log.txt file stores the execution logs and any errors that may arise.
 
